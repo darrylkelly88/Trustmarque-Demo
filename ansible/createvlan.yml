@@ -1,0 +1,17 @@
+---
+- name: Create VLANS
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create VLAN 101 on Cisco iOS devices
+      ansible.builtin.pause:
+        timeout: 5
+    - name: Assigning Ports for VLAN 101
+      ansible.builtin.pause:
+        timeout: 5
+    - name: Configuring Interfaces for VLAN 101
+      ansible.buil tin.pause:
+        timeout: 5
+    - name: Configuring DHCP for VLAN 101
+      ansible.buil tin.pause:
+        timeout: 5

@@ -1,0 +1,20 @@
+---
+- name: Create VM
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create RHEL VM 
+      ansible.builtin.pause:
+        timeout: 5
+    - name: Deploying HTTPD Webserver
+      ansible.builtin.pause:
+        timeout: 5
+    - name: Copy Website files
+      ansible.buil tin.pause:
+        timeout: 5
+    - name: Start and enable httpd
+      ansible.buil tin.pause:
+        timeout: 5
+    - name: Configure firewall
+      ansible.buil tin.pause:
+        timeout: 5
