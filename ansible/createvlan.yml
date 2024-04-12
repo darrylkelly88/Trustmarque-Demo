@@ -16,7 +16,7 @@
       ansible.builtin.pause:
         seconds: 5
     - set_fact:
-        LUN_task: "VLAN 101 Created"
+        VLAN_task: "VLAN 101 Created"
     - name: debug
       debug:
-        var: LUN_task
+        var: VLAN_task

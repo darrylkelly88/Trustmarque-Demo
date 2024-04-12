@@ -19,7 +19,7 @@
       ansible.builtin.pause:
         seconds: 5
     - set_fact:
-        LUN_task: "New Virtual Machine has been created"
+        VM_task: "New Virtual Machine has been created"
     - name: debug
       debug:
-        var: LUN_task
+        var: VM_task
