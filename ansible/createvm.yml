@@ -5,16 +5,16 @@
   tasks:
     - name: Create RHEL VM 
       ansible.builtin.pause:
-        timeout: 5
+        seconds: 5
     - name: Deploying HTTPD Webserver
       ansible.builtin.pause:
-        timeout: 5
+        seconds: 5
     - name: Copy Website files
       ansible.builtin.pause:
-        timeout: 5
+        seconds: 5
     - name: Start and enable httpd
       ansible.builtin.pause:
-        timeout: 5
+        seconds: 5
     - name: Configure firewall
       ansible.builtin.pause:
-        timeout: 5
+        seconds: 5
