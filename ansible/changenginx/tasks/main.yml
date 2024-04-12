@@ -1,7 +1,7 @@
 ---
 # tasks file for nginx_config
-- name: change template for demo.redhat.tdbsc.co.uk
+- name: change template for trustmarque-demo-webserver.redhat.tdbsc.co.uk
   template:
     src: trustmarque-demo-website.redhat.tdbsc.co.uk.conf.j2
-    dest: /etc/nginx/conf.d/demo.redhat.tdbsc.co.uk.conf
+    dest: /etc/nginx/conf.d/trustmarque-demo-website.redhat.tdbsc.co.uk.conf
   notify: restart nginx
