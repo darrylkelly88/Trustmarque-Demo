@@ -10,11 +10,11 @@
       ansible.builtin.pause:
         timeout: 5
     - name: Copy Website files
-      ansible.buil tin.pause:
+      ansible.builtin.pause:
         timeout: 5
     - name: Start and enable httpd
-      ansible.buil tin.pause:
+      ansible.builtin.pause:
         timeout: 5
     - name: Configure firewall
-      ansible.buil tin.pause:
+      ansible.builtin.pause:
         timeout: 5

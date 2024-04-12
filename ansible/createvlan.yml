@@ -10,8 +10,8 @@
       ansible.builtin.pause:
         timeout: 5
     - name: Configuring Interfaces for VLAN 101
-      ansible.buil tin.pause:
+      ansible.builtin.pause:
         timeout: 5
     - name: Configuring DHCP for VLAN 101
-      ansible.buil tin.pause:
+      ansible.builtin.pause:
         timeout: 5
