@@ -6,14 +6,9 @@
     - name: Create 100GB LUN on Netapp ONTAP with name new_volume
       ansible.builtin.pause:
         seconds: 5
-    - set_fact:
-        LUN_task: "VLAN 101 Added"
-    - name: debug disk_id
-      debug:
-        var: LUN_task
     - name: Mapping LUN to VMware
       ansible.builtin.pause:
-        seconds: 5
+        seconds: 5   
     - name: Refreshing and Scanning VMware Storage
       ansible.builtin.pause:
         seconds: 5
@@ -23,3 +18,8 @@
     - name: Creating New Datastore
       ansible.builtin.pause:
         seconds: 5
+    - set_fact:
+        LUN_task: "100GB LUN added to ONTAP"
+    - name: debug
+      debug:
+        var: LUN_task
