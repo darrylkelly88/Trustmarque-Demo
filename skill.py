@@ -5,12 +5,19 @@
 # session persistence, api calls, and more.
 # This sample is built using the handler classes approach in skill builder.
 import logging
+import requests
 import ask_sdk_core.utils as ask_utils
+
+from requests.structures import CaseInsensitiveDict
+from requests import post
 
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
+from ask_sdk_core.utils import is_intent_name, get_dialog_state, get_slot_value
+from ask_sdk_model import Response, DialogState
+from ask_sdk_model.ui import SsmlOutputSpeech
 
 from ask_sdk_model import Response
 
@@ -134,7 +141,7 @@ class MyNameIsSteveIntentHandler(AbstractRequestHandler):
 
 
 
-class YouKnowWhoIAmIntent(AbstractRequestHandler):
+class YouKnowWhoIAmIntentHandler(AbstractRequestHandler):
     """Handler for YouKnowWhoIAmIntent"""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -158,7 +165,7 @@ class YouKnowWhoIAmIntent(AbstractRequestHandler):
 
 
 
-class PizzaMurderIntent(AbstractRequestHandler):
+class PizzaMurderIntentHandler(AbstractRequestHandler):
     """Handler for PizzaMurderIntent"""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -186,7 +193,7 @@ class PizzaMurderIntent(AbstractRequestHandler):
 
 
 
-class WhoDoIWorkForIntent(AbstractRequestHandler):
+class WhoDoIWorkForIntentHandler(AbstractRequestHandler):
     """Handler for WhoDoIWorkForIntent"""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -207,6 +214,104 @@ class WhoDoIWorkForIntent(AbstractRequestHandler):
                 .response
         )
 
+
+
+class buildVlanIntentHandler(AbstractRequestHandler):
+    """Handler for buildVlanIntent."""
+    def can_handle(self, handler_input):
+        # Check if the incoming request is a "addVLANIntent"
+        return ask_utils.is_intent_name("buildVlanIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # URL and headers setup
+        url = "https://aap.redhat.tdbsc.co.uk/api/v2/workflow_job_templates/65/launch/"
+        PAT_token = "Bearer SeKPCkwhWxoz5Y0U5X2xm80HRuJuJh"
+        headers = CaseInsensitiveDict()
+        headers["Authorization"] = PAT_token
+        headers["Content-Type"] = "application/json"
+
+        # Post request to create VLAN
+        resp = requests.post(url, headers=headers, verify=False)
+        code = resp.status_code
+
+        # Generating spoken response based on the result
+        if code == 201:
+            speak_output = "<speak>Ok, Creating V-LAN 101<break time='1s'/></speak>"
+        else:
+            speak_output = f"Sorry there was an error. The server returned http error {code}"
+
+        # Build and return the response
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+
+class createLunIntentHandler(AbstractRequestHandler):
+    """Handler for createLunIntent."""
+    def can_handle(self, handler_input):
+        # Check if the incoming request is a "createLunIntent"
+        return ask_utils.is_intent_name("createLunIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # URL and headers setup
+        url = "https://aap.redhat.tdbsc.co.uk/api/v2/workflow_job_templates/67/launch/"
+        PAT_token = "Bearer SeKPCkwhWxoz5Y0U5X2xm80HRuJuJh"
+        headers = CaseInsensitiveDict()
+        headers["Authorization"] = PAT_token
+        headers["Content-Type"] = "application/json"
+
+        # Post request to create VLAN
+        resp = requests.post(url, headers=headers, verify=False)
+        code = resp.status_code
+
+        # Generating spoken response based on the result
+        if code == 201:
+            speak_output = "<speak>Ok, Creating LUN<break time='1s'/></speak>"
+        else:
+            speak_output = f"Sorry there was an error. The server returned http error {code}"
+
+        # Build and return the response
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+class createVmIntentHandler(AbstractRequestHandler):
+    """Handler for createVmIntent."""
+    def can_handle(self, handler_input):
+        # Check if the incoming request is a "createVmIntent"
+        return ask_utils.is_intent_name("createVmIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # URL and headers setup
+        url = "https://aap.redhat.tdbsc.co.uk/api/v2/workflow_job_templates/68/launch/"
+        PAT_token = "Bearer SeKPCkwhWxoz5Y0U5X2xm80HRuJuJh"
+        headers = CaseInsensitiveDict()
+        headers["Authorization"] = PAT_token
+        headers["Content-Type"] = "application/json"
+
+        # Post request to create VLAN
+        resp = requests.post(url, headers=headers, verify=False)
+        code = resp.status_code
+
+        # Generating spoken response based on the result
+        if code == 201:
+            speak_output = "<speak>Ok, Creating VM <break time='1s'/></speak>"
+        else:
+            speak_output = f"Sorry there was an error. The server returned http error {code}"
+
+        # Build and return the response
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
 
 
 
@@ -333,9 +438,13 @@ sb.add_request_handler(TurnOnAIMagicIntentHandler())
 sb.add_request_handler(WhoAmIIntentHandler())
 sb.add_request_handler(NoSeriouslyWhatsMyNameIntentHandler())
 sb.add_request_handler(MyNameIsSteveIntentHandler())
-sb.add_request_handler(YouKnowWhoIAmIntent())
-sb.add_request_handler(PizzaMurderIntent())
-sb.add_request_handler(WhoDoIWorkForIntent())
+sb.add_request_handler(YouKnowWhoIAmIntentHandler())
+sb.add_request_handler(PizzaMurderIntentHandler())
+sb.add_request_handler(WhoDoIWorkForIntentHandler())
+sb.add_request_handler(buildVlanIntentHandler())
+sb.add_request_handler(createLunIntentHandler())
+sb.add_request_handler(createVmIntentHandler())
+
 
 
 sb.add_request_handler(HelpIntentHandler())
